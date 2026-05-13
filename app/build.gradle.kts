@@ -45,7 +45,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
-
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
     // 1. Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.firebase:firebase-firestore")
@@ -53,6 +53,8 @@ dependencies {
     // 2. Vertex AI (Stable)
     implementation("com.google.firebase:firebase-vertexai:16.0.0")
     implementation("com.google.guava:guava:32.1.3-android")
+
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
     // 3. THE SLEDGEHAMMER: Forcing Ktor 2.x so the AI doesn't crash
     implementation("io.ktor:ktor-client-core:2.3.12")

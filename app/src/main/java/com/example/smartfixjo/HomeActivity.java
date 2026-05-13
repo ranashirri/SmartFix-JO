@@ -25,6 +25,19 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.content.ContextCompat;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import java.util.List;
+import java.util.Locale;
+
 public class HomeActivity extends AppCompatActivity {
 
     private EditText etProblemDescription;
@@ -32,18 +45,47 @@ public class HomeActivity extends AppCompatActivity {
 
     private GenerativeModelFutures generativeModel;
     private Executor executor;
+    private FusedLocationProviderClient fusedLocationClient;
+    private TextView tvLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        tvLocation = findViewById(R.id.tvLocation);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        // 1. Prepare the Permission Popup
+        ActivityResultLauncher<String[]> locationPermissionRequest = registerForActivityResult(
+                new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+                    Boolean fineLocationGranted = result.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false);
+                    if (fineLocationGranted != null && fineLocationGranted) {
+                        fetchRealLocation();
+                    } else {
+                        Toast.makeText(this, "Location permission is required!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        // 2. Make the button trigger the popup
+        findViewById(R.id.btnDetectLocation).setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                fetchRealLocation(); // Already have permission!
+            } else {
+                // Ask the user for permission
+                locationPermissionRequest.launch(new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                });
+            }
+        });
+
         // Wake up Firebase
         FirebaseApp.initializeApp(this);
 
         // Link the screen to the code
         etProblemDescription = findViewById(R.id.etProblemDescription);
-        btnEmergency = findViewById(R.id.btnEmergency);
+
         findViewById(R.id.cardPlumbing).setOnClickListener(v -> routeDirectlyToBooking("Plumbing"));
         findViewById(R.id.cardElectrical).setOnClickListener(v -> routeDirectlyToBooking("Electrical"));
         findViewById(R.id.cardAC).setOnClickListener(v -> routeDirectlyToBooking("AC Repair"));
@@ -69,8 +111,7 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
 
-        // Emergency button logic placeholder
-        btnEmergency.setOnClickListener(v -> Toast.makeText(this, "Emergency Dispatch Activated!", Toast.LENGTH_SHORT).show());
+
     }
 
     // The Triage Engine: Sending text to Gemini
@@ -150,4 +191,31 @@ public class HomeActivity extends AppCompatActivity {
         // Drive to the new screen!
         startActivity(intent);
     }
+    @SuppressLint("MissingPermission")
+    private void fetchRealLocation() {
+        tvLocation.setText("Locating satellite...");
+
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                try {
+                    // Turn coordinates into a real street name!
+                    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                    List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+                    if (addresses != null && !addresses.isEmpty()) {
+                        String realAddress = addresses.get(0).getAddressLine(0);
+                        tvLocation.setText(realAddress);
+                    } else {
+                        tvLocation.setText("Lat: " + location.getLatitude() + ", Lng: " + location.getLongitude());
+                    }
+                } catch (Exception e) {
+                    tvLocation.setText("Amman, Jordan (GPS Default)");
+                }
+            } else {
+                Toast.makeText(this, "Make sure your phone's GPS is turned on!", Toast.LENGTH_LONG).show();
+                tvLocation.setText("Location not found");
+            }
+        });
+    }
+
 }
