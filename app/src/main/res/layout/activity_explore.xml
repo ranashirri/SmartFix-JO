@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- THE FULL SCREEN MAP -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/exploreMapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigation" />
+
+    <!-- A Floating Title Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="Tap a pin to view technician details"
+            android:textAlignment="center"
+            android:textColor="@color/brand_dark_blue"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- THE BOTTOM NAVIGATION -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:itemIconTint="@color/brand_green"
+        app:itemTextColor="@color/brand_dark_blue"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout>

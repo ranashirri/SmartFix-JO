@@ -1,5 +1,6 @@
 package com.example.smartfixjo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -73,45 +74,45 @@ public class BookingActivity extends AppCompatActivity {
             tvQuestion1.setText("1. Where is the issue located?");
             setSpinnerOptions(spinner1, new String[]{"Bathroom (+0 JD)", "Kitchen (+0 JD)", "Main Water Line (+10 JD)", "Outdoor (+7 JD)"});
             tvQuestion2.setText("2. What is the exact problem?");
-            setSpinnerOptions(spinner2, new String[]{"Pipe Leaking (+12 JD)", "Drain Clogged (+7 JD)", "No Water Pressure (+25 JD)", "Broken Fixture (+5 JD)"});
+            setSpinnerOptions(spinner2, new String[]{"Pipe Leaking (+12 JD)", "Drain Clogged (+7 JD)", "No Water Pressure (+10 JD)", "Broken Fixture (+5 JD)"});
             tvQuestion3.setText("3. Is there active flooding right now?");
-            setSpinnerOptions(spinner3, new String[]{"No, standard repair (+0 JD)", "Yes, EMERGENCY! (+30 JD)"});
+            setSpinnerOptions(spinner3, new String[]{"No, standard repair (+3 JD)", "Yes (+10 JD)"});
 
         } else if (category.equals("Electrical")) {
             tvQuestion1.setText("1. What is the scope of the outage?");
-            setSpinnerOptions(spinner1, new String[]{"Single Outlet/Light (+5 JD)", "Whole Room (+15 JD)", "Entire House (+35 JD)"});
+            setSpinnerOptions(spinner1, new String[]{"Single Outlet/Light (+5 JD)", "Whole Room (+10 JD)", "Entire House (+30 JD)"});
             tvQuestion2.setText("2. Are there any dangerous signs?");
-            setSpinnerOptions(spinner2, new String[]{"No visible danger (+0 JD)", "Sparks visible (+20 JD)", "Burning smell (+25 JD)"});
+            setSpinnerOptions(spinner2, new String[]{"No visible danger (+0 JD)", "Sparks visible (+5 JD)", "Burning smell (+15 JD)"});
             tvQuestion3.setText("3. Have you checked the main circuit breaker?");
-            setSpinnerOptions(spinner3, new String[]{"Yes, it tripped (+0 JD)", "Yes, looks normal (+10 JD)", "No, I don't know how (+5 JD)"});
+            setSpinnerOptions(spinner3, new String[]{"Yes, it tripped (+0 JD)", "Yes, looks normal (+10 JD)", "No, I don't know how (+0 JD)"});
 
         } else if (category.equals("AC Repair")) {
             tvQuestion1.setText("1. What type of AC unit is it?");
-            setSpinnerOptions(spinner1, new String[]{"Split Unit/Inverter (+0 JD)", "Central AC (+20 JD)", "Window Unit (-5 JD)"});
+            setSpinnerOptions(spinner1, new String[]{"Split Unit/Inverter (+0 JD)", "Central AC (+15 JD)", "Window Unit (-5 JD)"});
             tvQuestion2.setText("2. What is the primary issue?");
-            setSpinnerOptions(spinner2, new String[]{"Not cooling at all (+15 JD)", "Dripping water inside (+10 JD)", "Making loud noises (+5 JD)", "Won't turn on (+20 JD)"});
+            setSpinnerOptions(spinner2, new String[]{"Not cooling at all (+25 JD)", "Dripping water inside (+15 JD)", "Making loud noises (+5 JD)", "Won't turn on (+20 JD)"});
             tvQuestion3.setText("3. When was it last serviced?");
-            setSpinnerOptions(spinner3, new String[]{"Within the last 6 months (+0 JD)", "Over a year ago (+10 JD)", "Never (+15 JD)"});
+            setSpinnerOptions(spinner3, new String[]{"Within the last 6 months (+0 JD)", "Over a year ago (+0 JD)", "Never (+0 JD)"});
 
         } else if (category.equals("Carpentry")) {
             tvQuestion1.setText("1. What needs to be fixed/installed?");
             setSpinnerOptions(spinner1, new String[]{"Doors & Locks (+5 JD)", "Kitchen Cabinets (+15 JD)", "Furniture Assembly (+10 JD)", "Windows (+10 JD)"});
             tvQuestion2.setText("2. What is the condition?");
-            setSpinnerOptions(spinner2, new String[]{"Wood is broken/cracked (+15 JD)", "Swollen from water (+20 JD)", "Hinge/Lock jammed (+5 JD)", "Brand new/Assembly (+0 JD)"});
+            setSpinnerOptions(spinner2, new String[]{"Wood is broken/cracked (+15 JD)", "Swollen from water (+10 JD)", "Hinge/Lock jammed (+5 JD)", "Brand new/Assembly (+0 JD)"});
             tvQuestion3.setText("3. Do you have replacement parts?");
-            setSpinnerOptions(spinner3, new String[]{"Yes, I have them (+0 JD)", "No, technician must supply (+25 JD)"});
+            setSpinnerOptions(spinner3, new String[]{"Yes, I have them (+5 JD)", "No, technician must supply (+25 JD)"});
 
         } else if (category.equals("Appliances")) {
             tvQuestion1.setText("1. Which appliance is broken?");
-            setSpinnerOptions(spinner1, new String[]{"Washing Machine (+10 JD)", "Refrigerator (+15 JD)", "Oven & Stove (+10 JD)", "Water Heater/Geyser (+5 JD)"});
+            setSpinnerOptions(spinner1, new String[]{"Washing Machine (+15 JD)", "Refrigerator (+15 JD)", "Oven & Stove (+15 JD)", "Water Heater/Geyser (+10 JD)"});
             tvQuestion2.setText("2. What is the brand?");
-            setSpinnerOptions(spinner2, new String[]{"Samsung (+5 JD)", "LG (+5 JD)", "Bosch (+10 JD)", "Beko/Other (+0 JD)"});
+            setSpinnerOptions(spinner2, new String[]{"Samsung (+0 JD)", "LG (+0 JD)", "Bosch (+0 JD)", "Beko/Other (+0 JD)"});
             tvQuestion3.setText("3. What is it doing wrong?");
-            setSpinnerOptions(spinner3, new String[]{"Won't power on (+15 JD)", "Making strange noises (+5 JD)", "Leaking water (+10 JD)", "Not completing cycle (+10 JD)"});
+            setSpinnerOptions(spinner3, new String[]{"Won't power on (+15 JD)", "Making strange noises (+5 JD)", "Leaking water (+15 JD)", "Not completing cycle (+10 JD)"});
 
         } else if (category.equals("Pest Control")) {
             tvQuestion1.setText("1. What type of pests are you seeing?");
-            setSpinnerOptions(spinner1, new String[]{"Cockroaches (+10 JD)", "Ants (+5 JD)", "Mice & Rodents (+20 JD)", "Bedbugs (+35 JD)"});
+            setSpinnerOptions(spinner1, new String[]{"Cockroaches (+10 JD)", "Ants (+5 JD)", "Mice & Rodents (+20 JD)", "Bedbugs (+15 JD)"});
             tvQuestion2.setText("2. Where is the infestation located?");
             setSpinnerOptions(spinner2, new String[]{"Kitchen (+5 JD)", "Bedroom (+10 JD)", "Garden (+15 JD)", "The whole house (+40 JD)"});
             tvQuestion3.setText("3. Are there children/pets in the house?");
@@ -232,11 +233,12 @@ public class BookingActivity extends AppCompatActivity {
         FirebaseFirestore.getInstance().collection("maintenance_tickets")
                 .add(ticket)
                 .addOnSuccessListener(docRef -> {
-                    // Start the Uber Tracking Screen!
-                    android.content.Intent intent = new android.content.Intent(BookingActivity.this, TrackingActivity.class);
+                    // Start the Uber Tracking Screen and pass the data!
+                    Intent intent = new Intent(BookingActivity.this, TrackingActivity.class);
                     intent.putExtra("EXTRA_CATEGORY", category);
+                    intent.putExtra("EXTRA_ESTIMATE", currentTotal); // Pass the calculated price!
                     startActivity(intent);
-                    finish(); // Close the booking screen
+                    finish();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error saving to cloud.", Toast.LENGTH_SHORT).show();

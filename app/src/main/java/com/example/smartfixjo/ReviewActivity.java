@@ -16,10 +16,19 @@ import java.util.Map;
 
 public class ReviewActivity extends AppCompatActivity {
 
+    private String category;
+    private double estimatedPrice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
+
+        // 1. Catch the data from the previous screens
+        category = getIntent().getStringExtra("EXTRA_CATEGORY");
+        estimatedPrice = getIntent().getDoubleExtra("EXTRA_ESTIMATE", 0.0);
+
+        if (category == null) category = "Unknown Service";
 
         RatingBar ratingBar = findViewById(R.id.ratingBar);
         TextInputEditText etFinalPrice = findViewById(R.id.etFinalPrice);
@@ -29,40 +38,45 @@ public class ReviewActivity extends AppCompatActivity {
             String priceEntered = etFinalPrice.getText().toString().trim();
             float stars = ratingBar.getRating();
 
-            // 1. Safety Check: Make sure they actually typed a number
             if (priceEntered.isEmpty()) {
                 etFinalPrice.setError("Please enter the amount paid");
                 return;
             }
 
-            // Lock the button so they don't double-click and pay twice!
-            btnSubmitReview.setText("SAVING TO CLOUD...");
+            btnSubmitReview.setText("SAVING AI DATA...");
             btnSubmitReview.setEnabled(false);
 
-            // 2. Package the data up for Firebase
-            double finalAmount = Double.parseDouble(priceEntered);
+            double actualPrice = Double.parseDouble(priceEntered);
 
-            Map<String, Object> reviewData = new HashMap<>();
-            reviewData.put("technician_name", "Mahmoud A."); // Hardcoded for the prototype
-            reviewData.put("rating", stars);
-            reviewData.put("amount_paid_jod", finalAmount);
-            reviewData.put("timestamp", FieldValue.serverTimestamp());
+            // 2. Calculate the variance for the AI!
+            double priceDifference = actualPrice - estimatedPrice;
 
-            // 3. Send it to the Firestore Database
-            FirebaseFirestore.getInstance().collection("job_reviews")
-                    .add(reviewData)
+            // 3. Package the ultimate ML Training Payload
+            Map<String, Object> aiTrainingData = new HashMap<>();
+            aiTrainingData.put("category", category);
+            aiTrainingData.put("technician_name", "Mahmoud A.");
+            aiTrainingData.put("rating", stars);
+
+            // The Cost Analysis
+            aiTrainingData.put("estimated_cost", estimatedPrice);
+            aiTrainingData.put("actual_cost", actualPrice);
+            aiTrainingData.put("variance_jod", priceDifference); // Positive means app underpriced, Negative means app overpriced
+
+            // Timestamp
+            aiTrainingData.put("timestamp", FieldValue.serverTimestamp());
+
+            // 4. Send to a new dedicated AI feedback collection
+            FirebaseFirestore.getInstance().collection("ai_cost_analysis")
+                    .add(aiTrainingData)
                     .addOnSuccessListener(documentReference -> {
-                        // Success!
-                        Toast.makeText(this, "Payment Logged! Rating: " + stars + " Stars", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Data secured for AI training!", Toast.LENGTH_LONG).show();
 
-                        // Teleport back to Home Screen
                         Intent intent = new Intent(ReviewActivity.this, HomeActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     })
                     .addOnFailureListener(e -> {
-                        // Uh oh, internet issue
-                        Toast.makeText(this, "Error saving payment. Try again.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error saving data. Try again.", Toast.LENGTH_SHORT).show();
                         btnSubmitReview.setText("SUBMIT & RETURN HOME");
                         btnSubmitReview.setEnabled(true);
                     });

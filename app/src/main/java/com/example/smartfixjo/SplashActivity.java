@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Ensure HomeActivity is created before running this
-                Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

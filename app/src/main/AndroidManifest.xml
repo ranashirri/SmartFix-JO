@@ -18,6 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartFixJO">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExploreActivity"
+            android:exported="false" />
+        <activity
             android:name=".ReviewActivity"
             android:exported="false" />
         <activity

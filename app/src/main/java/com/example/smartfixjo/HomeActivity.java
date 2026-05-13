@@ -1,5 +1,6 @@
 package com.example.smartfixjo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 // The Firebase & Vertex AI Imports
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.vertexai.FirebaseVertexAI; // <- This was missing earlier!
 import com.google.firebase.vertexai.GenerativeModel;
@@ -111,6 +113,24 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
 
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
+        bottomNav.setSelectedItemId(R.id.nav_home); // Assuming your first icon is nav_home
+
+        bottomNav.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_explore) { // Assuming your middle icon is nav_explore
+                startActivity(new Intent(HomeActivity.this, ExploreActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (itemId == R.id.nav_home) {
+                return true; // Already here
+            } else if (itemId == R.id.nav_profile) {
+                startActivity(new Intent(this, ProfileActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }
+            return false;
+        });
 
     }
 

@@ -32,8 +32,8 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mahmoud A." android:textSize="18sp" android:textStyle="bold" android:textColor="@color/brand_dark_blue"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⭐ 4.9 (120 jobs) • Honda Civic" android:textSize="14sp" android:textColor="#666666"/>
+                    <TextView android:id="@+id/tvTechName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mahmoud A." android:textSize="18sp" android:textStyle="bold" android:textColor="@color/brand_dark_blue"/>
+                    <TextView android:id="@+id/tvTechDetails" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⭐ 4.9 (120 jobs) • Honda Civic" android:textSize="14sp" android:textColor="#666666"/>
                 </LinearLayout>
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5 min" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/brand_green"/>
             </LinearLayout>

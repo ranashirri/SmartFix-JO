@@ -105,24 +105,23 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp"
                     app:strokeColor="@color/brand_dark_blue"
                     app:strokeWidth="1dp">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
-
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/ic_plumbing" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -141,25 +140,23 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp"
                     app:strokeColor="@color/brand_dark_blue"
                     app:strokeWidth="1dp">
-
                     <LinearLayout
-                        android:id="@+id/cardElectrical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
-
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/ic_electrical" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -178,25 +175,23 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp"
                     app:strokeColor="@color/brand_dark_blue"
                     app:strokeWidth="1dp">
-
                     <LinearLayout
-                        android:id="@+id/cardAC"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
-
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/ic_ac" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -215,25 +210,23 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp"
                     app:strokeColor="@color/brand_dark_blue"
                     app:strokeWidth="1dp">
-
                     <LinearLayout
-                        android:id="@+id/cardCarpentry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
-
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/ic_carpentry" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -252,25 +245,23 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp"
                     app:strokeColor="@color/brand_dark_blue"
                     app:strokeWidth="1dp">
-
                     <LinearLayout
-                        android:id="@+id/cardAppliances"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
-
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/ic_appliances" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -289,25 +280,23 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp"
                     app:strokeColor="@color/brand_dark_blue"
                     app:strokeWidth="1dp">
-
                     <LinearLayout
-                        android:id="@+id/cardPestControl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp">
-
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/ic_pest" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
